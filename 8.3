@@ -1,0 +1,28 @@
+Task 1 Explain in brief the architecture of Apache Hadoop Yarn.
+
+YARN Infrastructure (Yet Another Resource Negotiator) is the framework responsible for providing the computational resources 
+needed for application executions.
+Two important elements are:
+The Resource Manager (one per cluster) is the master.
+the location of the slaves is known to it. 
+ services are run, the most important is the Resource Scheduler which decides how to assign the resources.
+The Node Manager  is known to be the  slave of the infrastructure. 
+When it starts, it announces himself to the Resource Manager then  it  an heartbeat is sent to the Resource Manager. 
+Each Node Manager offers some resources to the cluster. 
+Its resource capacity is the amount of memory and the number of vcores. 
+At run-time, the Resource Scheduler will decide how to use this capacity: 
+a Container is a fraction of the NM capacity and it is used by the client for running a program.
+In YARN, there are at least three actors:
+->	the Job Submitter (the client)
+->	the Resource Manager (the master)
+->	the Node Manager (the slave)
+The application startup process is the following:
+1)	a client submits an application to the Resource Manager
+2)	the Resource Manager allocates a container
+3)	the Resource Manager contacts the related Node Manager
+4)	the Node Manager launches the container
+5)	the Container executes the Application Master
+The Application Master is responsible for the execution of a single application.
+It asks for containers to the Resource Scheduler (Resource Manager) and executes specific programs  on the obtained containers.
+the application logic is known to the application master and thus it is framework-specific. 
+The MapReduce framework provides its own impleme ntation of an Application Master.
